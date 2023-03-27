@@ -1,10 +1,10 @@
 # appMeteo
 application météo 
-
-TODO
+TODO :
   - fond en fonction du code météo 
-  - header avec nom de la ville selectionné, température, température resentie, humidité, vitesse du vent, température + haute et + basse 
-  - prévisualisation sur 3 jours avec température la plus haute et la plus basse 
-  - diagrame de la température e fonction de l'heure de la journé actuel slider qui change l'heure
-  - pouvoir rechercher une ville 
-  - avoir acces a ses villes "favorites"
+  - header avec la ville selectioné, la température, la température resentie, les températures min/max et la vitesse du vent 
+	- prévisualisation sur 3 jours avet date et température min/max
+	- diagramme température en fonction de l'heure avec un slider pour changer l'heure   
+	- acces a une recherche des ville
+	- possibilité d'ajouter une ville en favori 
+	- accès a une liste de ville 
