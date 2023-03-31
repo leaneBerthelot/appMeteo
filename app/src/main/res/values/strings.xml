@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">appMeteo</string>
+
+    <string name="textview_temp">22°C</string>
+    <string name="textview_city">Bordeaux</string>
+    <string name="textview_code_temp">test</string>
+    <string name="textview_temp_min_max">12°C/28°C</string>
+    <string name="textview_temp_res">20°C</string>
+    <string name="textview_day">Lun</string>
+    <string name="textview_prev_temp_min_max">12°C/28°C</string>
+    <string name="textview_hour_code_temp">nuageux</string>
+    <string name="textview_hour_temp_res">12°C</string>
+    <string name="textview_hour_hour">16h</string>
+    <string name="textview_city_city">12°C</string>
+    <string name="textview_city_temp_res">Bordeaux</string>
+
+
+</resources>
