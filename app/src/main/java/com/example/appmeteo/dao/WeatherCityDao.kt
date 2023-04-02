@@ -1,4 +1,5 @@
 package com.example.appmeteo.dao
+import android.provider.SyncStateContract.Helpers.insert
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -16,4 +17,7 @@ interface WeatherCityDao {
 
     @Query("DELETE FROM city_table")
     suspend fun deleteAll()
+
+    companion object
+
 }

@@ -9,7 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:gravity="top">
+        android:gravity="top"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -19,27 +23,57 @@
             app:cardCornerRadius="30dp"
             app:cardElevation="0dp">
 
-            <TextView
-                android:id="@+id/textview_city_city"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/textview_city_city"
-                android:textColor="@color/white"
-                android:textSize="22dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"/>
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingRight="25dp"
+                android:paddingLeft="25dp">
 
-            <TextView
-                android:id="@+id/textview_city_temp_res"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/textview_city_temp_res"
-                android:textColor="@color/white"
-                android:textSize="22dp" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textview_city_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/textview_city_adress"
+                        android:textColor="@color/white"
+                        android:textSize="15dp"
+                        android:paddingBottom="2dp"/>
+
+                    <TextView
+                        android:id="@+id/textview_city_city_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/textview_city_city_code"
+                        android:textColor="@color/white"
+                        android:textSize="15dp"
+                        android:paddingTop="2dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="right">
+
+                    <ImageView
+                        android:id="@+id/imageView_like"
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/heart" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </androidx.cardview.widget.CardView>
-
-
 
     </LinearLayout>
 

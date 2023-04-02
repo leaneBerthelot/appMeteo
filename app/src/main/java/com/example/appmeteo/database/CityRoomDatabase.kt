@@ -11,7 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [WeatherCityEntity::class], version = 1)
+@Database(entities = [WeatherCityEntity::class], version = 2, exportSchema = false)
 abstract class CityRoomDatabase : RoomDatabase() {
     abstract fun cityDao(): WeatherCityDao
     companion object {
@@ -50,11 +50,11 @@ abstract class CityRoomDatabase : RoomDatabase() {
             }
         }
         suspend fun populateDatabase(weatherCityDao: WeatherCityDao) {
-            weatherCityDao.deleteAll()
-            var city = WeatherCityEntity("Hello")
-            weatherCityDao.insert(city)
-            city = WeatherCityEntity("World!")
-            weatherCityDao.insert(city)
+            //weatherCityDao.deleteAll()
+            //var city = WeatherCityEntity("Hello")
+            //weatherCityDao.insert(city)
+            //city = WeatherCityEntity("World!")
+            //weatherCityDao.insert(city)
         }
     }
 }

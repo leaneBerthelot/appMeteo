@@ -1,7 +1,9 @@
 package com.example.appmeteo.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -28,44 +30,48 @@ class WeatherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val heureActuelle = LocalTime.now().hour
+
+        val intent = getIntent()
+
+        val latitude = intent.getFloatExtra("latitude", 44.8F)
+        val longitude = intent.getFloatExtra("longitude", -0.5F)
+        val city = intent.getStringExtra("city") ?: "Bordeaux"
+
+        val currentHour = LocalTime.now().hour
 
         val textview_temp_min_max = findViewById<TextView>(R.id.textview_temp_min_max)
         val textview_temp = findViewById<TextView>(R.id.textview_temp)
         val textview_code_temp = findViewById<TextView>(R.id.textview_code_temp)
         val textview_temp_res = findViewById<TextView>(R.id.textview_temp_res)
+        val textview_city = findViewById<TextView>(R.id.textview_city)
 
+        textview_city.text = city
+
+        val button_add = findViewById<Button>(R.id.button_add)
 
         viewModel = ViewModelProvider(this)[WeatherViewModel::class.java]
+
+        button_add.setOnClickListener {
+            val intent = Intent(this, CityActivity::class.java)
+            startActivity(intent)
+        }
 
         viewModel.responseWeather.observe(this, Observer { response ->
                 try {
                     if (response.isSuccessful) {
                         println("CALL API : ${response.body()}")
 
-                        val tempMin = response.body()?.daily?.temperature_2m_min?.get(0)?.toString()
-                        val tempMax = response.body()?.daily?.temperature_2m_max?.get(0)?.toString()
-                        textview_temp_min_max.text = tempMin + "°C/" + tempMax + "°C"
-                        textview_temp.text = response.body()?.hourly?.temperature_2m?.get(heureActuelle).toString()+ "°C"
-                        textview_temp_res.text = response.body()?.hourly?.apparent_temperature?.get(heureActuelle).toString()+ "°C"
-                        val weatherCode = response.body()?.hourly?.weathercode?.get(heureActuelle)
+                        textview_temp_min_max.text = response.body()?.daily?.temperature_2m_min?.get(0)?.toString() + "°C/" + response.body()?.daily?.temperature_2m_max?.get(0)?.toString() + "°C"
+                        textview_temp.text = response.body()?.hourly?.temperature_2m?.get(currentHour).toString()+ "°C"
+                        textview_temp_res.text = response.body()?.hourly?.apparent_temperature?.get(currentHour).toString()+ "°C"
+                        val weatherCode = response.body()?.hourly?.weathercode?.get(currentHour)
                         textview_code_temp.text = weatherCode?.let { viewModel.getDescription(it) }
-
-                        val layoutManager = LinearLayoutManager(
-                            this,
-                            LinearLayoutManager.HORIZONTAL,
-                            true
-                        )
-
-                        val myList = findViewById<View>(R.id.hour_recycler_view) as RecyclerView
-                        myList.layoutManager = layoutManager
 
                         val days = mutableListOf<Prev>()
                         val size = response.body()?.daily?.temperature_2m_min?.size ?: 0
 
                         val calendar = Calendar.getInstance()
                         val day = calendar.get(Calendar.DAY_OF_WEEK)
-                        //v
 
                         for (i in 0..size-1) {
                             days.add(Prev(
@@ -94,7 +100,6 @@ class WeatherActivity : AppCompatActivity() {
                         hourRecyclerView.layoutManager = LinearLayoutManager(this)
                         hourRecyclerView.adapter = HourPrevAdapter(hours)
 
-
                     } else {
                         Toast.makeText(baseContext, "Error: ${response.code()}", Toast.LENGTH_LONG).show()
                     }
@@ -105,13 +110,8 @@ class WeatherActivity : AppCompatActivity() {
                 }
         })
 
-        viewModel.getResponse()
+        viewModel.getResponse(latitude, longitude)
+       }
 
-        // Database Room
-        val applicationScope = CoroutineScope(SupervisorJob())
-        val database = CityRoomDatabase.getDatabase(this, applicationScope)
-        var repository = WeatherCityRepository(database.cityDao())
-
-        }
 
 }

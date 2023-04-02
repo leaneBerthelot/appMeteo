@@ -11,8 +11,9 @@
     <string name="textview_hour_code_temp">nuageux</string>
     <string name="textview_hour_temp_res">12°C</string>
     <string name="textview_hour_hour">16h</string>
-    <string name="textview_city_city">12°C</string>
-    <string name="textview_city_temp_res">Bordeaux</string>
+    <string name="textview_city_adress">12 Rue des mousses </string>
+    <string name="textview_city_city_code">33300 Bordeaux</string>
+    <string name="textview_city_temp">17.3°C</string>
 
 
 </resources>

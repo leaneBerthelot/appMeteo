@@ -16,6 +16,6 @@ interface WeatherAPIInterface {
         @Query("daily")  daily: String = "weathercode,temperature_2m_max,temperature_2m_min",
         @Query("forecast_days") forecast_days: Int = 14,
         @Query("timezone") timezone: String = "Europe/London",
-    ): Response<WeatherResponse> // permet d'avoir des infos supp tel que le status
+    ): Response<WeatherResponse>
 
 }

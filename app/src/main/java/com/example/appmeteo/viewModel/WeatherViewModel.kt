@@ -1,7 +1,5 @@
 package com.example.appmeteo.viewModel
 
-import android.content.Context
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +9,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
 import retrofit2.Response
 import java.util.*
 
@@ -21,9 +18,9 @@ class WeatherViewModel : ViewModel() {
     private val _responseWeather = MutableLiveData<Response<WeatherResponse>>()
     val responseWeather: LiveData<Response<WeatherResponse>> = _responseWeather
 
-    fun getResponse () {
+    fun getResponse (latitude: Float, longitude: Float) {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = retrofitBuilder.getWeather(44.83F, -0.57F)
+            val response = retrofitBuilder.getWeather(latitude, longitude)
             withContext(Dispatchers.Main) {
                 _responseWeather.value = response
             }
